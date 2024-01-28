@@ -1,0 +1,14 @@
+{
+  "language": "typescript",
+  "app": "npx ts-node main.ts",
+  "terraformProviders": [
+    "hashicorp/template@~> 2.2.0",
+    "scaleway/scaleway@>= 1.11.0"
+  ],
+  "projectId": "b87f3db5-6ea7-40d9-a086-726f9c977654",
+  "sendCrashReports": "true",
+  "terraformModules": [],
+  "context": {
+
+  }
+}
