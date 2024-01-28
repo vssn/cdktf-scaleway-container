@@ -8,7 +8,8 @@
   "scripts": {
     "get": "cdktf get",
     "build": "tsc",
-    "synth": "cdktf synth",
+    "synth": "npm run build && cdktf synth",
+    "deploy": "cdktf deploy",
     "compile": "tsc --pretty",
     "watch": "tsc -w",
     "test": "jest",

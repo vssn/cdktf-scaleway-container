@@ -1,5 +1,6 @@
 import {ScalewayProvider} from "../.gen/providers/scaleway/provider"
 import {Container} from "../.gen/providers/scaleway/container"
+import {ContainerNamespace} from "../.gen/providers/scaleway/container-namespace"
 
 import {ACCESS_KEY, SECRET_KEY} from '../env.json'
 
@@ -14,4 +15,5 @@ export {
   Provider,
   credentials,
   Container,
+  ContainerNamespace,
 };

@@ -1,29 +1,37 @@
 import { Construct } from "constructs";
-import { App, TerraformStack } from "cdktf";
-import { Provider, credentials, Container } from "./provider/scaleway";
-import { NAMESPACE_ID, CONTAINER_PATH, PROVIDER } from "./env.json";
+import { App, TerraformOutput, TerraformStack } from "cdktf";
+import { Provider, credentials, Container, ContainerNamespace } from "./provider/scaleway";
+import { NAMESPACE_NAME, PROJECT_ID, IMAGE_PATH } from "./env.json";
 
 class MyStack extends TerraformStack {
   constructor(scope: Construct, id: string) {
     super(scope, id);
 
-    if (PROVIDER === "scaleway") {
-      new Provider(this, PROVIDER, credentials);
-      const container = new Container(this, "container", {
-        name: `deployment-${Number(new Date).toString(36)}`,
-        description: 'Created with circlico formula: static-node-container',
-        namespaceId: NAMESPACE_ID,
-        registryImage: CONTAINER_PATH,
-        port: 80,
-        cpuLimit: 70,
-        memoryLimit: 128,
-        maxScale: 1,
-        minScale: 1,
-        deploy: true,
-      });
+    new Provider(this, "scaleway", credentials);
 
-      console.log(container)
-    }
+    const containerNamespace = new ContainerNamespace(this, "container-namespace", {
+      name: NAMESPACE_NAME,
+      projectId: PROJECT_ID,
+      description: "Scaleway Serverless Container Namespace"
+    })
+    
+    const container = new Container(this, "container", {
+      name: `deployment-${Number(new Date()).toString(36)}`,
+      description: "Created as a basic container image deployment on scaleway",
+      namespaceId: containerNamespace.id,
+      
+      registryImage: IMAGE_PATH,
+      port: 80,
+      cpuLimit: 70,
+      memoryLimit: 128,
+      maxScale: 1,
+      minScale: 1,
+      deploy: true,
+    });
+
+    new TerraformOutput(this, "my-domain", {
+      value: container.domainName,
+    });
   }
 }
 
