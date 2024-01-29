@@ -11,6 +11,9 @@ This is work in progress, if you want to check it out do the following:
    You can find the Project ID in your Scaleway "Project Dashboard" under "Settings"
 5. Rename the file to env.json
 6. Execute:
-   npm run get
-   npm run synth
-   npm run deploy
+
+npm run get
+
+npm run synth
+
+npm run deploy
