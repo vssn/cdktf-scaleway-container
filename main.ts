@@ -20,7 +20,7 @@ class MyStack extends TerraformStack {
       description: "Created as a basic container image deployment on scaleway",
       namespaceId: containerNamespace.id,
       
-      registryImage: `${CONTAINER_OPTIONS.REPOSITORY}${CONTAINER_OPTIONS.IMAGE}`,
+      registryImage: `${CONTAINER_OPTIONS.IMAGE_REPOSITORY}${CONTAINER_OPTIONS.IMAGE_NAME}`,
       port: CONTAINER_OPTIONS.PORT,
       cpuLimit: 70,
       memoryLimit: 128,
