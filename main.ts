@@ -1,7 +1,7 @@
 import { Construct } from "constructs";
 import { App, TerraformOutput, TerraformStack } from "cdktf";
 import { Provider, credentials, Container, ContainerNamespace } from "./provider/scaleway";
-import { NAMESPACE_NAME, PROJECT_ID, IMAGE_PATH } from "./env.json";
+import { NAMESPACE_NAME, PROJECT_ID, CONTAINER_OPTIONS } from "./env.json";
 
 class MyStack extends TerraformStack {
   constructor(scope: Construct, id: string) {
@@ -20,8 +20,8 @@ class MyStack extends TerraformStack {
       description: "Created as a basic container image deployment on scaleway",
       namespaceId: containerNamespace.id,
       
-      registryImage: IMAGE_PATH,
-      port: 80,
+      registryImage: `${CONTAINER_OPTIONS.REPOSITORY}${CONTAINER_OPTIONS.IMAGE}`,
+      port: CONTAINER_OPTIONS.PORT,
       cpuLimit: 70,
       memoryLimit: 128,
       maxScale: 1,
